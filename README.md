@@ -1,7 +1,7 @@
 ﻿# Instructions
 You will submit a small project .NET MVC project. While the project domain is entirely fictional, and the tasks you complete are rather contrived, the code you will need to write to complete the tasks has many parallels to code written in real-world business situations. Write and structure your code with the same care you would apply in a real-world business application.
 
-A project "skeleton" has been provided containing a single controller with an Index action and view, as well as four unimplemented actions. The Index view is a simple list of buttons corresponding to those unimplemented actions.
+A project "skeleton" has been provided containing a single controller with an Index action and view, as well as four unimplemented actions. The Index view is a simple list of buttons corresponding to those unimplemented actions. DOWNLOAD this repository to your computer. (Please use the Download ZIP option. Do not use Git Clone to retrieve the project, and do not check in any changes to this repository.)
 
 A set of simple views and their associated view models has been provided. Your focus should be on the back-end code. You will be working with a public RESTful API that returns results JSON-formatted data sets based on the 7 Star Wars films. The documentation for querying the API can be found at https://swapi.co/documentation
 
