@@ -15,6 +15,8 @@ namespace PlattSampleApp.Models
 
         public string Terrain { get; set; }
 
+        public string LengthOfDay { get; set; }
+
         public string LengthOfYear { get; set; }
 
         public string FormattedPopulation => Population == "unknown" ? "unknown" : long.Parse(Population).ToString("N0");

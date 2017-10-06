@@ -215,8 +215,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AllPlanetsViewModel.cs" />
+    <Compile Include="Models\ApiPersonModel.cs" />
     <Compile Include="Models\ApiPlanetModel.cs" />
-    <Compile Include="Models\ApiResponseModel.cs" />
+    <Compile Include="Models\ApiCollectionModel.cs" />
+    <Compile Include="Models\ApiVehicleModel.cs" />
     <Compile Include="Models\PlanetDetailsViewModel.cs" />
     <Compile Include="Models\PlanetResidentsViewModel.cs" />
     <Compile Include="Models\ResidentSummary.cs" />
@@ -267,7 +269,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\GetAllPlanets.cshtml" />
-    <Content Include="Views\Home\GetPlanetTwentyTwo.cshtml" />
+    <Content Include="Views\Home\GetPlanet.cshtml" />
     <Content Include="Views\Home\GetResidentsOfPlanetNaboo.cshtml" />
     <Content Include="Views\Home\VehicleSummary.cshtml" />
   </ItemGroup>

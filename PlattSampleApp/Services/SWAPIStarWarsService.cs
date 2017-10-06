@@ -12,7 +12,7 @@ namespace PlattSampleApp.Services
     public class SWAPIStarWarsService : IStarWarsService
     {
       
-        private ApiResponseModel<T> getResultForRoute<T>(string url)
+        private T getResultForRoute<T>(string url)
         {
             var result = "";
             var request = (HttpWebRequest)WebRequest.Create(url);
@@ -23,7 +23,7 @@ namespace PlattSampleApp.Services
                 result = reader.ReadToEnd();
             }
 
-            return JsonConvert.DeserializeObject<ApiResponseModel<T>>(result);
+            return JsonConvert.DeserializeObject<T>(result);
         }
 
         public List<ApiPlanetModel> GetAllPlanets()
@@ -34,7 +34,7 @@ namespace PlattSampleApp.Services
             // To get all items, loop through until the next property is null
             while (true)
             {
-                var response = getResultForRoute<ApiPlanetModel>(nextUrl);
+                var response = getResultForRoute<ApiResponseModel<ApiPlanetModel>>(nextUrl);
                 listOfPlanets.AddRange(response.Results);
                 nextUrl = response.Next;
                 // Break when no next url found
@@ -44,22 +44,25 @@ namespace PlattSampleApp.Services
             return listOfPlanets;
         }
 
-        public string GetAllVehicles()
+        public List<ApiVehicleModel> GetAllVehicles()
         {
             throw new NotImplementedException();
         }
 
-        public string GetPersonDetails(int personId)
+        public ApiPersonModel GetPersonDetails(int personId)
         {
             throw new NotImplementedException();
         }
 
-        public string GetPlanetById(int planetId)
+        public ApiPlanetModel GetPlanetById(int planetId)
         {
-            throw new NotImplementedException();
+            string nextUrl = "https://swapi.co/api/planets/" + planetId + "/?format=json";
+            var planet = getResultForRoute<ApiPlanetModel>(nextUrl);
+
+            return planet;
         }
 
-        public string GetResidentsOfPlanet(int planetId)
+        public List<ApiPersonModel> GetResidentsOfPlanet(int planetId)
         {
             throw new NotImplementedException();
         }

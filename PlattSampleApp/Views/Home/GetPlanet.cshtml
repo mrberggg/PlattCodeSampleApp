@@ -4,10 +4,10 @@
 
 <html>
 <head>
-    <title>Details for Planet Number 22</title>
+    <title>Details for Planet Number @Model.Id</title>
 </head>
 <body>
-    <h3>Details for Planet Number 22</h3>
+    <h3>Details for Planet Number @Model.Id</h3>
     <div>
         <ul>
             <li>Planet Name: @Model.Name</li>
@@ -17,7 +17,7 @@
             <li>Climate: @Model.Climate</li>
             <li>Gravity: @Model.Gravity</li>
             <li>Surface Water: @Model.SurfaceWaterPercentage %</li>
-            <li>Population: @Int64.Parse(Model.Population).ToString("N0")</li>
+            <li>Population: @Model.Population</li>
         </ul>
     </div>
 </body>

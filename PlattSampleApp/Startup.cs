@@ -13,6 +13,8 @@ namespace PlattSampleApp
         {
             Mapper.Initialize(config =>
             {
+                config.CreateMap<ApiPersonModel, ResidentSummary>();
+                config.CreateMap<ApiPlanetModel, SinglePlanetViewModel>();
                 config.CreateMap<ApiPlanetModel, PlanetDetailsViewModel>()
                     .ConvertUsing(src =>
                     {
@@ -27,6 +29,7 @@ namespace PlattSampleApp
                             LengthOfYear = src.LengthOfYear
                         };
                     });
+                config.CreateMap<ApiVehicleModel, VehicleSummaryViewModel>();
             });
         }
     }

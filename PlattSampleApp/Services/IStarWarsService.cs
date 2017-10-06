@@ -9,9 +9,9 @@ namespace PlattSampleApp.Services
     public interface IStarWarsService
     {
         List<ApiPlanetModel> GetAllPlanets();
-        string GetPlanetById(int planetId);
-        string GetResidentsOfPlanet(int planetId);
-        string GetAllVehicles();
-        string GetPersonDetails(int personId);
+        ApiPlanetModel GetPlanetById(int planetId);
+        List<ApiPersonModel> GetResidentsOfPlanet(int planetId);
+        List<ApiVehicleModel> GetAllVehicles();
+        ApiPersonModel GetPersonDetails(int personId);
     }
 }

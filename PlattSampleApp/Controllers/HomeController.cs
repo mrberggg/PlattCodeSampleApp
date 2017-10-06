@@ -31,17 +31,16 @@ namespace PlattSampleApp.Controllers
             {
                 Planets = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
             };
-            // TODO: Implement this controller action
 
             return View(model);
         }
 
-        public ActionResult GetPlanetTwentyTwo(int planetid)
+        public ActionResult GetPlanet(int planetId)
         {
-            var model = new SinglePlanetViewModel();
-
-            // TODO: Implement this controller action
-
+            var planet = _starWarsService.GetPlanetById(planetId);
+            var model = Mapper.Map<SinglePlanetViewModel>(planet);
+            model.Id = planetId;
+            
             return View(model);
         }
 
@@ -56,9 +55,9 @@ namespace PlattSampleApp.Controllers
 
         public ActionResult VehicleSummary()
         {
-            var model = new VehicleSummaryViewModel();
-
-            // TODO: Implement this controller action
+            var vehicles = _starWarsService.GetAllVehicles();
+            
+            var model = Mapper.Map<VehicleSummaryViewModel>(vehicles);
 
             return View(model);
         }
