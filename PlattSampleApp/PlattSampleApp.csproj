@@ -270,7 +270,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\GetAllPlanets.cshtml" />
     <Content Include="Views\Home\GetPlanet.cshtml" />
-    <Content Include="Views\Home\GetResidentsOfPlanetNaboo.cshtml" />
+    <Content Include="Views\Home\GetResidentsOfPlanet.cshtml" />
     <Content Include="Views\Home\VehicleSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>

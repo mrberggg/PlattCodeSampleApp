@@ -64,7 +64,15 @@ namespace PlattSampleApp.Services
 
         public List<ApiPersonModel> GetResidentsOfPlanet(int planetId)
         {
-            throw new NotImplementedException();
+            var planet = GetPlanetById(planetId);
+            var residents = new List<ApiPersonModel>();
+            for(var i = 0; i < planet.Residents.Length; i++)
+            {
+                var resident = getResultForRoute<ApiPersonModel>(planet.Residents[i]);
+                residents.Add(resident);
+            }
+
+            return residents;
         }
     }
 }

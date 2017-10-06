@@ -44,12 +44,11 @@ namespace PlattSampleApp.Controllers
             return View(model);
         }
 
-        public ActionResult GetResidentsOfPlanetNaboo(string planetname)
+        public ActionResult GetResidentsOfPlanet(int planetId)
         {
-            var model = new PlanetResidentsViewModel();
-
-            // TODO: Implement this controller action
-
+            var residents = _starWarsService.GetResidentsOfPlanet(planetId);
+            var model = Mapper.Map<List<ResidentSummary>>(residents);
+            
             return View(model);
         }
 

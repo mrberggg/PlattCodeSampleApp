@@ -1,4 +1,4 @@
-﻿@model PlattSampleApp.Models.PlanetResidentsViewModel
+﻿@model List<PlattSampleApp.Models.ResidentSummary>
 
 <!DOCTYPE html>
 
@@ -9,7 +9,7 @@
 <body>
     <div>
         <h3>Residents of Planet Naboo</h3>
-        @foreach (var person in Model.Residents)
+        @foreach (var person in Model)
         {
             <div>
                 <ul>
