@@ -13,7 +13,7 @@ namespace PlattSampleApp.Models
         }
 
         public List<PlanetDetailsViewModel> Planets { get; set; }
-
-        public double AverageDiameter { get; set; }
+        
+        public double AverageDiameter => Planets.Sum(x => (double) x.Diameter) / Planets.Count;
     }
 }

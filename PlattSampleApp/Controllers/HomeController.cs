@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PlattSampleApp.Models;
 using PlattSampleApp.Services;
+using AutoMapper;
 
 namespace PlattSampleApp.Controllers
 {
@@ -24,7 +25,12 @@ namespace PlattSampleApp.Controllers
 
         public ActionResult GetAllPlanets()
         {
-            var model = new AllPlanetsViewModel();
+            var allPlanets = _starWarsService.GetAllPlanets();
+
+            var model = new AllPlanetsViewModel
+            {
+                Planets = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
+            };
             // TODO: Implement this controller action
 
             return View(model);
