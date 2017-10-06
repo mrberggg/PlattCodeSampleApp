@@ -4,11 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PlattSampleApp.Models;
+using PlattSampleApp.Services;
 
 namespace PlattSampleApp.Controllers
 {
     public class HomeController : Controller
     {
+        private IStarWarsService _starWarsService;
+
+        public HomeController(IStarWarsService starWarsService)
+        {
+            _starWarsService = starWarsService;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -17,7 +25,6 @@ namespace PlattSampleApp.Controllers
         public ActionResult GetAllPlanets()
         {
             var model = new AllPlanetsViewModel();
-
             // TODO: Implement this controller action
 
             return View(model);
