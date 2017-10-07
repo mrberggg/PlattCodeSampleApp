@@ -29,7 +29,6 @@ namespace PlattSampleApp
                             LengthOfYear = src.LengthOfYear
                         };
                     });
-                config.CreateMap<ApiVehicleModel, VehicleSummaryViewModel>();
             });
         }
     }

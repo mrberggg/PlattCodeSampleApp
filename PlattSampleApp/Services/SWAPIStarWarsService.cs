@@ -46,7 +46,20 @@ namespace PlattSampleApp.Services
 
         public List<ApiVehicleModel> GetAllVehicles()
         {
-            throw new NotImplementedException();
+            var vehicles = new List<ApiVehicleModel>();
+            string nextUrl = "https://swapi.co/api/vehicles/?format=json";
+            // The api returns a paginated response. 
+            // To get all items, loop through until the next property is null
+            while (true)
+            {
+                var response = getResultForRoute<ApiResponseModel<ApiVehicleModel>>(nextUrl);
+                vehicles.AddRange(response.Results);
+                nextUrl = response.Next;
+                // Break when no next url found
+                if (nextUrl == null) break;
+            }
+
+            return vehicles;
         }
 
         public ApiPersonModel GetPersonDetails(int personId)

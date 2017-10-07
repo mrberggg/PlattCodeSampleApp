@@ -27,9 +27,11 @@ namespace PlattSampleApp.Controllers
         {
             var allPlanets = _starWarsService.GetAllPlanets();
 
+            var detailsViewModel = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
+                .OrderByDescending(x => x.Diameter).ToList();
             var model = new AllPlanetsViewModel
             {
-                Planets = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
+                Planets = detailsViewModel
             };
 
             return View(model);
@@ -55,8 +57,11 @@ namespace PlattSampleApp.Controllers
         public ActionResult VehicleSummary()
         {
             var vehicles = _starWarsService.GetAllVehicles();
-            
-            var model = Mapper.Map<VehicleSummaryViewModel>(vehicles);
+
+            var model = new VehicleSummaryViewModel
+            {
+                _Vehicles = vehicles
+            };
 
             return View(model);
         }

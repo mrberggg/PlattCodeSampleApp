@@ -14,6 +14,8 @@ namespace PlattSampleApp.Models
 
         public List<PlanetDetailsViewModel> Planets { get; set; }
         
-        public double AverageDiameter => Planets.Sum(x => (double) x.Diameter) / Planets.Count;
+        public double AverageDiameter => (
+            Planets.Where(x => x.Diameter != 0).Sum(x => (double) x.Diameter)
+            ) / Planets.Where(x => x.Diameter != 0).ToList().Count;
     }
 }

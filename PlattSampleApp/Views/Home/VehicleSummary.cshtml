@@ -10,7 +10,7 @@
     <div>
         <h3>Vehicle Summary</h3>
         <ul>
-            <li>Total Number of Vehicles with Known Cost: @Model.VehicleCount</li>
+            <li>Total Number of Vehicles with Known Cost: @Model.VehiclesWithCostCount</li>
             <li>Total Number of Manufacturers: @Model.ManufacturerCount</li>
         </ul>
 
@@ -28,7 +28,7 @@
                     <tr>
                         <td>@d.ManufacturerName</td>
                         <td>@d.VehicleCount</td>
-                        <td>@d.AverageCost.ToString("N2")</td>
+                        <td>@d.AverageCost</td>
                     </tr>
                 }
             </tbody>
