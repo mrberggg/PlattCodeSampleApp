@@ -28,11 +28,9 @@ namespace PlattSampleApp.Controllers
             var allPlanets = _starWarsService.GetAllPlanets();
             var formattedPlanets = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
                     .OrderByDescending(x => x.Diameter).ToList();
+            var model = new AllPlanetsViewModel { Planets = formattedPlanets };
 
-            return View(new AllPlanetsViewModel
-            {
-                Planets = formattedPlanets
-            });
+            return View(model);
         }
 
         public ActionResult GetPlanet(int planetId)

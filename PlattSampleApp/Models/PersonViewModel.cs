@@ -25,20 +25,22 @@ namespace PlattSampleApp.Models
 
         public string Homeworld { get; set; }
 
-        public string[] Films { get; set; }
+        public List<string> Films { get; set; }
 
-        public string[] Species { get; set; }
+        public List<string> Species { get; set; }
 
-        public string[] Vehicles { get; set; }
+        public List<string> Vehicles { get; set; }
 
-        public string[] StarShips { get; set; }
+        public List<String> StarShips { get; set; }
 
-        public string FormattedFilms => Films.Length > 0 ? String.Join(", ", Films) : "-";
+        public string FormattedWeight => Weight == "unknown" ? "Unknown" : $"{Weight}kg";
 
-        public string FormattedSpecies => Species.Length > 0 ? String.Join(", ", Species) : "-";
+        public string FormattedFilms => Films.Count > 0 ? String.Join(", ", Films) : "-";
 
-        public string FormattedVehicles => Vehicles.Length > 0 ? String.Join(", ", Vehicles) : "-";
+        public string FormattedSpecies => Species.Count > 0 ? String.Join(", ", Species) : "-";
 
-        public string FormattedStarships => StarShips.Length > 0 ? String.Join(", ", StarShips) : "-";
+        public string FormattedVehicles => Vehicles.Count > 0 ? String.Join(", ", Vehicles) : "-";
+
+        public string FormattedStarships => StarShips.Count > 0 ? String.Join(", ", StarShips) : "-";
     }
 }

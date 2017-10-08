@@ -1,5 +1,9 @@
 ﻿@model List<PlattSampleApp.Models.ResidentSummary>
 
+@{
+    ViewBag.Title = "Planet Residents";
+}
+
 <!DOCTYPE html>
 
 <html>
@@ -27,8 +31,8 @@
                 <tr>
                     <td>@person.Name</td>
                     <td>@person.Gender</td>
-                    <td>@person.Height cm</td>
-                    <td>@person.Weight kg</td>
+                    <td>@person.FormattedHeight</td>
+                    <td>@person.FormattedWeight</td>
                     <td>@person.HairColor</td>
                     <td>@person.EyeColor</td>
                     <td>@person.SkinColor</td>

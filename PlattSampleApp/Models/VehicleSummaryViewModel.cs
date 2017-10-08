@@ -11,8 +11,6 @@ namespace PlattSampleApp.Models
         {
             Details = new List<VehicleStatsViewModel>();
         }
-
-        public List<ApiVehicleModel> _Vehicles { private get; set; }
         
         public List<VehicleStatsViewModel> Details { get; set; }
 

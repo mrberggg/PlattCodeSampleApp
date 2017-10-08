@@ -10,6 +10,7 @@ namespace PlattSampleApp.Services
     {
         public override void Load()
         {
+            Bind<IHttpService>().To<HttpService>();
             Bind<IStarWarsService>().To<SWAPIStarWarsService>();
         }
     }

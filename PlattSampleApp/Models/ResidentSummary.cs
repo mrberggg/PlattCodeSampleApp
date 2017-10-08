@@ -20,5 +20,9 @@ namespace PlattSampleApp.Models
         public string EyeColor { get; set; }
 
         public string SkinColor { get; set; }
+
+        public string FormattedHeight => Height == "unknown" ? "Unknown" : $"{Height}cm";
+
+        public string FormattedWeight => Weight == "unknown" ? "Unknown" : $"{Weight}kg";
     }
 }

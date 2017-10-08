@@ -12,30 +12,23 @@ namespace PlattSampleApp.Services
 {
     public class SWAPIStarWarsService : IStarWarsService
     {
-      
-        private T getResultForRoute<T>(string url)
+        private IHttpService _httpService;
+
+        // Note: I've put our http calls in its own service but am not using any 3rd party libraries
+        public SWAPIStarWarsService(HttpService httpService)
         {
-            var result = "";
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.AutomaticDecompression = DecompressionMethods.GZip;
-            
-            using (var reader = new StreamReader(request.GetResponse().GetResponseStream()))
-            {
-                result = reader.ReadToEnd();
-            }
-
-            return JsonConvert.DeserializeObject<T>(result);
+            _httpService = httpService;
         }
-
+      
         public List<ApiPlanetModel> GetAllPlanets()
         {
             var listOfPlanets = new List<ApiPlanetModel>();
-            string nextUrl = "https://swapi.co/api/planets/?format=json";
+            string nextUrl = "https://swapi.co/api/planets/";
             // The api returns a paginated response. 
             // To get all items, loop through until the next property is null
             while (true)
             {
-                var response = getResultForRoute<ApiResponseModel<ApiPlanetModel>>(nextUrl);
+                var response = _httpService.Get<ApiResponseModel<ApiPlanetModel>>(nextUrl);
                 listOfPlanets.AddRange(response.Results);
                 nextUrl = response.Next;
                 // Break when no next url found
@@ -48,12 +41,12 @@ namespace PlattSampleApp.Services
         public List<ApiVehicleModel> GetAllVehicles()
         {
             var vehicles = new List<ApiVehicleModel>();
-            string nextUrl = "https://swapi.co/api/vehicles/?format=json";
+            string nextUrl = "https://swapi.co/api/vehicles/";
             // The api returns a paginated response. 
             // To get all items, loop through until the next property is null
             while (true)
             {
-                var response = getResultForRoute<ApiResponseModel<ApiVehicleModel>>(nextUrl);
+                var response = _httpService.Get<ApiResponseModel<ApiVehicleModel>>(nextUrl);
                 vehicles.AddRange(response.Results);
                 nextUrl = response.Next;
                 // Break when no next url found
@@ -66,12 +59,12 @@ namespace PlattSampleApp.Services
         public ApiPersonModel GetPersonByName(string personName)
         {
             ApiPersonModel person = null;
-            string nextUrl = "https://swapi.co/api/people/?format=json";
+            string nextUrl = "https://swapi.co/api/people/";
             // The api returns a paginated response. 
             // To get all items, loop through until the next property is null
             while (true)
             {
-                var response = getResultForRoute<ApiResponseModel<ApiPersonModel>>(nextUrl);
+                var response = _httpService.Get<ApiResponseModel<ApiPersonModel>>(nextUrl);
                 // Check to see if planet is in results
                 if (response.Results.Exists(x => x.Name == personName))
                 {
@@ -89,33 +82,33 @@ namespace PlattSampleApp.Services
                 throw new PlanetNotFoundException();
             }
             // Get homeworld
-            person.Homeworld = getResultForRoute<ApiPlanetModel>(person.Homeworld).Name;
+            person.Homeworld = _httpService.Get<ApiPlanetModel>(person.Homeworld).Name;
             // Get films
-            string[] films = new string[person.Films.Length];
-            for(var i = 0; i < person.Films.Length; i++)
+            var films = new List<string>();
+            foreach(var film in person.Films)
             {
-                films[i] = getResultForRoute<ApiFilmModel>(person.Films[i]).Title;
+                films.Add(_httpService.Get<ApiFilmModel>(film).Title);
             }
             person.Films = films;
             // Get species
-            string[] species = new string[person.Species.Length];
-            for(var i = 0; i < person.Species.Length; i++)
+            var species = new List<string>();
+            foreach(var s in person.Species)
             {
-                species[i] = getResultForRoute<ApiSpeciesModel>(person.Species[i]).Name;
+                species.Add(_httpService.Get<ApiSpeciesModel>(s).Name);
             }
             person.Species = species;
             // Get vehicles
-            string[] vehicles = new string[person.Vehicles.Length];
-            for(var i = 0; i < person.Vehicles.Length; i++)
+            var vehicles = new List<string>();
+            foreach(var vehicle in person.Vehicles)
             {
-                vehicles[i] = getResultForRoute<ApiVehicleModel>(person.Vehicles[i]).Name;
+                vehicles.Add(_httpService.Get<ApiVehicleModel>(vehicle).Name);
             }
             person.Vehicles = vehicles;
             // Get starships
-            var starships = new string[person.StarShips.Length];
-            for(var i = 0; i < person.StarShips.Length; i++)
+            var starships = new List<string>();
+            foreach(var starship in person.StarShips)
             {
-                starships[i] = getResultForRoute<ApiStarshipModel>(person.StarShips[i]).Name;
+                starships.Add(_httpService.Get<ApiStarshipModel>(starship).Name);
             }
             person.StarShips = starships;
             
@@ -126,8 +119,8 @@ namespace PlattSampleApp.Services
         {
             var allPlanets = new List<ApiPlanetModel>();
 
-            string url = $"https://swapi.co/api/planets/{planetId}/?format=json";
-            var planet = getResultForRoute<ApiPlanetModel>(url);
+            string url = $"https://swapi.co/api/planets/{planetId}";
+            var planet = _httpService.Get<ApiPlanetModel>(url);
             planet.Id = planetId;
             return planet;
         }
@@ -135,12 +128,12 @@ namespace PlattSampleApp.Services
         public List<ApiPersonModel> GetResidentsOfPlanet(string planetName)
         {
             ApiPlanetModel planet = null;
-            string nextUrl = "https://swapi.co/api/planets/?format=json";
+            string nextUrl = "https://swapi.co/api/planets/";
             // The api returns a paginated response. 
             // To get all items, loop through until the next property is null
             while (true)
             {
-                var response = getResultForRoute<ApiResponseModel<ApiPlanetModel>>(nextUrl);
+                var response = _httpService.Get<ApiResponseModel<ApiPlanetModel>>(nextUrl);
                 // Check to see if planet is in results
                 if(response.Results.Exists(x => x.Name == planetName))
                 {
@@ -161,7 +154,7 @@ namespace PlattSampleApp.Services
             var residents = new List<ApiPersonModel>();
             for(var i = 0; i < planet.Residents.Length; i++)
             {
-                var resident = getResultForRoute<ApiPersonModel>(planet.Residents[i]);
+                var resident = _httpService.Get<ApiPersonModel>(planet.Residents[i]);
                 residents.Add(resident);
             }
 

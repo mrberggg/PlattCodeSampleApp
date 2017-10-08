@@ -1,5 +1,9 @@
 ﻿@model PlattSampleApp.Models.SinglePlanetViewModel
 
+@{
+    ViewBag.Title = $"{Model.Name} Details";
+}
+
 <!DOCTYPE html>
 
 <html>
@@ -16,7 +20,7 @@
             <li>Diameter: @Model.Diameter km</li>
             <li>Climate: @Model.Climate</li>
             <li>Gravity: @Model.Gravity</li>
-            <li>Surface Water: @Model.SurfaceWaterPercentage %</li>
+            <li>Surface Water: @(Model.SurfaceWaterPercentage)%</li>
             <li>Population: @Model.Population</li>
         </ul>
     </div>

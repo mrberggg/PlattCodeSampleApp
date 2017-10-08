@@ -1,5 +1,9 @@
 ﻿@model PlattSampleApp.Models.PersonViewModel
 
+@{
+    ViewBag.Title = Model.Name;
+}
+
 <!DOCTYPE html>
 
 <html>
@@ -12,7 +16,7 @@
         <ul>
             <li>Name: @Model.Name</li>
             <li>Height: @Model.Height</li>
-            <li>Weight: @Model.Weight</li>
+            <li>Weight: @Model.FormattedWeight</li>
             <li>Hair Color: @Model.HairColor</li>
             <li>Skin Color: @Model.SkinColor</li>
             <li>Eye Color: @Model.EyeColor</li>
