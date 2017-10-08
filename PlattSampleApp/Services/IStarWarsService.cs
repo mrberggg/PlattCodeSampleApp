@@ -12,6 +12,6 @@ namespace PlattSampleApp.Services
         ApiPlanetModel GetPlanetById(int planetId);
         List<ApiPersonModel> GetResidentsOfPlanet(string planetName);
         List<ApiVehicleModel> GetAllVehicles();
-        ApiPersonModel GetPersonDetails(int personId);
+        ApiPersonModel GetPersonByName(string personName);
     }
 }

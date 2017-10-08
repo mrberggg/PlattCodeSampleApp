@@ -3,6 +3,7 @@ using Microsoft.Owin;
 using Owin;
 using PlattSampleApp.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 [assembly: OwinStartupAttribute(typeof(PlattSampleApp.Startup))]
 namespace PlattSampleApp
@@ -13,22 +14,49 @@ namespace PlattSampleApp
         {
             Mapper.Initialize(config =>
             {
+                config.CreateMap<ApiPersonModel, PersonViewModel>();
                 config.CreateMap<ApiPersonModel, ResidentSummary>();
-                config.CreateMap<ApiPlanetModel, SinglePlanetViewModel>();
                 config.CreateMap<ApiPlanetModel, PlanetDetailsViewModel>()
+                    .ForMember(dest => dest.Diameter, opt => opt.ResolveUsing(p =>
+                    {
+                        int diameter = 0;
+                        if (p.Diameter != "unknown")
+                        {
+                            diameter = int.Parse(p.Diameter);
+                        }
+                        return diameter;
+                    }));
+                config.CreateMap<ApiPlanetModel, SinglePlanetViewModel>();
+                config.CreateMap<List<ApiVehicleModel>, VehicleSummaryViewModel>()
                     .ConvertUsing(src =>
                     {
-                        int diameter;
-                        int.TryParse(src.Diameter, out diameter);
-                        return new PlanetDetailsViewModel
+                        var details = src.GroupBy(x => x.Manufacturer).Select(x =>
+                            {
+                                double averageCost = 0;
+                                if (x.Where(y => y.CostInCredits != "unknown").Count() > 0)
+                                {
+                                    averageCost = x.Where(y => y.CostInCredits != "unknown")
+                                        .Select(y =>  (double)long.Parse(y.CostInCredits))
+                                        .Where(y => y != 0)
+                                        .Average();
+                                }
+                                return new VehicleStatsViewModel
+                                {
+                                    AverageCost = averageCost,
+                                    ManufacturerName = x.First().Manufacturer,
+                                    VehicleCount = x.Count()
+                                };
+                            })
+                            .OrderByDescending(x => x.VehicleCount)
+                            .OrderByDescending(x => x.AverageCost)
+                            .ToList();
+                        return new VehicleSummaryViewModel
                         {
-                            Name = src.Name,
-                            Population = src.Population,
-                            Diameter = diameter,
-                            Terrain = src.Terrain,
-                            LengthOfYear = src.LengthOfYear
+                            Details = details,
+                            ManufacturerCount = src.GroupBy(x => x.Manufacturer).Count(),
+                            VehiclesWithCostCount = src.Where(x => x.CostInCredits != null).Count()
                         };
-                    });
+                    });         
             });
         }
     }

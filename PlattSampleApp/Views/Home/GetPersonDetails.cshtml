@@ -1,0 +1,29 @@
+﻿@model PlattSampleApp.Models.PersonViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.Name</title>
+</head>
+<body>
+    <h1>@Model.Name</h1>
+    <div>
+        <ul>
+            <li>Name: @Model.Name</li>
+            <li>Height: @Model.Height</li>
+            <li>Weight: @Model.Weight</li>
+            <li>Hair Color: @Model.HairColor</li>
+            <li>Skin Color: @Model.SkinColor</li>
+            <li>Eye Color: @Model.EyeColor</li>
+            <li>Birth Year: @Model.BirthYear</li>
+            <li>Gender: @Model.Gender</li>
+            <li>Homeworld: @Model.Homeworld</li>
+            <li>Films: @Model.FormattedFilms</li>
+            <li>Species: @Model.FormattedSpecies</li>
+            <li>Vehicles: @Model.FormattedVehicles</li>
+            <li>Starships: @Model.FormattedStarships</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -211,15 +211,20 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Exceptions\PersonNotFoundException.cs" />
     <Compile Include="Exceptions\PlanetNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AllPlanetsViewModel.cs" />
+    <Compile Include="Models\ApiFilmModel.cs" />
     <Compile Include="Models\ApiPersonModel.cs" />
     <Compile Include="Models\ApiPlanetModel.cs" />
     <Compile Include="Models\ApiCollectionModel.cs" />
+    <Compile Include="Models\ApiSpeciesModel.cs" />
+    <Compile Include="Models\ApiStarshipModel.cs" />
     <Compile Include="Models\ApiVehicleModel.cs" />
+    <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Models\PlanetDetailsViewModel.cs" />
     <Compile Include="Models\PlanetResidentsViewModel.cs" />
     <Compile Include="Models\ResidentSummary.cs" />
@@ -273,6 +278,7 @@
     <Content Include="Views\Home\GetPlanet.cshtml" />
     <Content Include="Views\Home\GetResidentsOfPlanet.cshtml" />
     <Content Include="Views\Home\VehicleSummary.cshtml" />
+    <Content Include="Views\Home\GetPersonDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

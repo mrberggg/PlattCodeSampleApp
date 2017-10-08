@@ -28,12 +28,11 @@ namespace PlattSampleApp.Controllers
             var allPlanets = _starWarsService.GetAllPlanets();
             var formattedPlanets = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
                     .OrderByDescending(x => x.Diameter).ToList();
-            var model = new AllPlanetsViewModel
+
+            return View(new AllPlanetsViewModel
             {
                 Planets = formattedPlanets
-            };
-
-            return View(model);
+            });
         }
 
         public ActionResult GetPlanet(int planetId)
@@ -56,11 +55,15 @@ namespace PlattSampleApp.Controllers
         public ActionResult VehicleSummary()
         {
             var vehicles = _starWarsService.GetAllVehicles();
+            var model = Mapper.Map<VehicleSummaryViewModel>(vehicles);
 
-            var model = new VehicleSummaryViewModel
-            {
-                _Vehicles = vehicles
-            };
+            return View(model);
+        }
+
+        public ActionResult GetPersonDetails(string personName)
+        {
+            var person = _starWarsService.GetPersonByName(personName);
+            var model = Mapper.Map<PersonViewModel>(person);
 
             return View(model);
         }
