@@ -9,20 +9,31 @@
 <body>
     <div>
         <h3>Residents of Planet Naboo</h3>
-        @foreach (var person in Model)
-        {
-            <div>
-                <ul>
-                    <li>Name: @person.Name</li>
-                    <li>Gender: @person.Gender</li>
-                    <li>Height: @person.Height cm</li>
-                    <li>Weight: @person.Weight kg</li>
-                    <li>Hair Color: @person.HairColor</li>
-                    <li>Eye Color: @person.EyeColor</li>
-                    <li>Skin Color: @person.SkinColor</li>
-                </ul>
-            </div>
-        }
-    </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Gender</td>
+                    <td>Height</td>
+                    <td>Weight</td>
+                    <td>Hair Color</td>
+                    <td>Eye Color</td>
+                    <td>Skin Color</td>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.Gender</td>
+                    <td>@person.Height cm</td>
+                    <td>@person.Weight kg</td>
+                    <td>@person.HairColor</td>
+                    <td>@person.EyeColor</td>
+                    <td>@person.SkinColor</td>
+                </tr>
+            }
+</div>
 </body>
 </html>

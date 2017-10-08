@@ -19,22 +19,31 @@ namespace PlattSampleApp.Models
             get
             {
                 var details = new List<VehicleStatsViewModel>();
-                _Vehicles.GroupBy(x => x.Manufacturer).ToList()
-                    .ForEach(x =>
+                var vehiclesGroupedByManufacturer = _Vehicles.GroupBy(x => x.Manufacturer)
+                    .ToList();
+                vehiclesGroupedByManufacturer.ForEach(x =>
+                {
+                    double averageCost = 0;
+                    if(x.Where(y => y.CostInCredits != "unknown").ToList().Count() > 0)
                     {
-                        details.Add(new VehicleStatsViewModel
+                        averageCost = x.Where(y => y.CostInCredits != "unknown").Select(y =>
                         {
-                            ManufacturerName = x.First().Manufacturer,
-                            VehicleCount = x.Count(),
-                            AverageCost = x
-                                .Where(y => y.CostInCredits != "unknown")
-                                .Average(y => {
-                                    long cost;
-                                    long.TryParse(y.CostInCredits, out cost);
-                                    return cost;
-                                })
-                        });
+                            return (double) long.Parse(y.CostInCredits);
+                        })
+                        .Where(y => y != 0)
+                        .Average();
+                    }
+                    details.Add(new VehicleStatsViewModel
+                    {
+                        ManufacturerName = x.First().Manufacturer,
+                        VehicleCount = x.Count(),
+                        AverageCost = averageCost
                     });
+                });
+                details = details
+                    .OrderByDescending(x => x.VehicleCount)
+                    .OrderByDescending(x => x.AverageCost)
+                    .ToList();
                 return details;
             }
             private set { }

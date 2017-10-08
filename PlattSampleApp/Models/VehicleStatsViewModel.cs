@@ -12,5 +12,7 @@ namespace PlattSampleApp.Models
         public int VehicleCount { get; set; }
 
         public double AverageCost { get; set; }
+
+        public string FormattedAverageCost => AverageCost == 0 ? "Unknown" : AverageCost.ToString();
     }
 }

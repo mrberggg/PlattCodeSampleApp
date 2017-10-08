@@ -8,6 +8,7 @@ namespace PlattSampleApp.Models
 {
     public class ApiPlanetModel
     {
+        public int Id { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("rotation_period")]

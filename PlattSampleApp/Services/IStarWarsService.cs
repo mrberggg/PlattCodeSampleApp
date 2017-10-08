@@ -10,7 +10,7 @@ namespace PlattSampleApp.Services
     {
         List<ApiPlanetModel> GetAllPlanets();
         ApiPlanetModel GetPlanetById(int planetId);
-        List<ApiPersonModel> GetResidentsOfPlanet(int planetId);
+        List<ApiPersonModel> GetResidentsOfPlanet(string planetName);
         List<ApiVehicleModel> GetAllVehicles();
         ApiPersonModel GetPersonDetails(int personId);
     }

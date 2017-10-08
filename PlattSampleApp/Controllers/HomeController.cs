@@ -26,12 +26,11 @@ namespace PlattSampleApp.Controllers
         public ActionResult GetAllPlanets()
         {
             var allPlanets = _starWarsService.GetAllPlanets();
-
-            var detailsViewModel = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
-                .OrderByDescending(x => x.Diameter).ToList();
+            var formattedPlanets = Mapper.Map<List<PlanetDetailsViewModel>>(allPlanets)
+                    .OrderByDescending(x => x.Diameter).ToList();
             var model = new AllPlanetsViewModel
             {
-                Planets = detailsViewModel
+                Planets = formattedPlanets
             };
 
             return View(model);
@@ -41,15 +40,15 @@ namespace PlattSampleApp.Controllers
         {
             var planet = _starWarsService.GetPlanetById(planetId);
             var model = Mapper.Map<SinglePlanetViewModel>(planet);
-            model.Id = planetId;
             
             return View(model);
         }
 
-        public ActionResult GetResidentsOfPlanet(int planetId)
+        public ActionResult GetResidentsOfPlanet(string planetName)
         {
-            var residents = _starWarsService.GetResidentsOfPlanet(planetId);
-            var model = Mapper.Map<List<ResidentSummary>>(residents);
+            var residents = _starWarsService.GetResidentsOfPlanet(planetName);
+            var model = Mapper.Map<List<ResidentSummary>>(residents)
+                .OrderBy(x => x.Name).ToList();
             
             return View(model);
         }
