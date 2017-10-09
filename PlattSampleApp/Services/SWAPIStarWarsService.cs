@@ -15,7 +15,7 @@ namespace PlattSampleApp.Services
         private IHttpService _httpService;
 
         // Note: I've put our http calls in its own service but am not using any 3rd party libraries
-        public SWAPIStarWarsService(HttpService httpService)
+        public SWAPIStarWarsService(IHttpService httpService)
         {
             _httpService = httpService;
         }

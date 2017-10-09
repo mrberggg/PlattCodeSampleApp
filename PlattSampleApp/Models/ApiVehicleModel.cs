@@ -40,5 +40,11 @@ namespace PlattSampleApp.Models
 
         [JsonProperty("vehicle_class")]
         public string VehicleClass { get; set; }
+
+        [JsonProperty("pilots")]
+        public List<string> Pilots { get; set; }
+
+        [JsonProperty("films")]
+        public List<string> Films { get; set; }
     }
 }
